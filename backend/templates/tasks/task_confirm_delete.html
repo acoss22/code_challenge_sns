@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-xl mx-auto">
+    <div class="bg-white border rounded-xl p-6 shadow-sm">
+        <h2 class="text-xl font-semibold mb-2 text-gray-900">
+            Delete task
+        </h2>
+        <p class="text-sm text-gray-500 mb-6">
+            This action cannot be undone.
+        </p>
+
+        <div class="border rounded-lg p-4 bg-gray-50 mb-6">
+            <div class="flex items-center gap-2 mb-2">
+                <h3 class="font-medium text-gray-900">
+                    {{ task.title }}
+                </h3>
+
+                {% if task.status == "PENDING" %}
+                <span class="text-xs px-2 py-0.5 rounded-full bg-gray-100 text-gray-700">
+                    Pending
+                </span>
+                {% elif task.status == "IN_PROGRESS" %}
+                <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">
+                    In progress
+                </span>
+                {% elif task.status == "COMPLETED" %}
+                <span class="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+                    Completed
+                </span>
+                {% endif %}
+            </div>
+
+            <p class="text-sm text-gray-600 mb-2">
+                Due {{ task.due_date }}
+            </p>
+
+            {% if task.description %}
+            <p class="text-sm text-gray-700 whitespace-pre-line">
+                {{ task.description }}
+            </p>
+            {% else %}
+            <p class="text-sm text-gray-500 italic">
+                No description provided.
+            </p>
+            {% endif %}
+        </div>
+
+        <form method="post" class="flex items-center gap-4">
+            {% csrf_token %}
+            <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md
+                       font-medium hover:bg-red-700 transition">
+                Delete task
+            </button>
+
+            <a href="{% url 'task-list' %}" class="text-gray-600 hover:underline text-sm">
+                Cancel
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}
