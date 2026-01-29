@@ -18,7 +18,7 @@ Ana Sequeira
 ### Running the Application
 
 1. Clone the repository:
-git clone <repository-url>
+git clone https://github.com/acoss22/code_challenge_sns.git
 cd task_manager
 
 2. Build and start the containers:
